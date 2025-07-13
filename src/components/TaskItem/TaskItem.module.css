@@ -1,0 +1,20 @@
+.btn span, .tag{
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.btn, .tag{
+    max-width: 100%;
+}
+
+.tag{
+    margin: 0;
+}
+
+.card {
+    --margin: 10px;
+    margin: var(--margin);
+    width: 350px;
+    max-width: calc(100% - 2 * var(--margin));
+    flex-shrink: 0;
+}
