@@ -1,23 +1,23 @@
-import React, { useState }  from "react";
+import React  from "react";
 import type { ITask } from "../../const";
-import { Flex } from "antd";
 import TaskItem from "../TaskItem/TaskItem";
+import classes from "./TasksList.module.css";
 
 
 
-interface TaskListProps {
+interface TasksListProps {
     tasks: ITask[];
 }
 
-const TaskList: React.FunctionComponent<TaskListProps> = 
+const TasksList: React.FunctionComponent<TasksListProps> = 
     ({tasks}) => {
     return(
-        <Flex wrap justify="center">
+        <div className={classes.grid}>
             {tasks.map(task =>
                 <TaskItem key = {task.id} {...task}></TaskItem>
             )}
-        </Flex>
+        </div>
     )
 }
 
-export default TaskList
+export default TasksList

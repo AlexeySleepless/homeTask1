@@ -41,7 +41,7 @@ const TaskItem: React.FunctionComponent<ITask> =
                 },
             }}
         >
-        <Card title={title} size="small" className={classes.card}>
+        <Card title={title} size="small" className={classes.card} onClick={toDetails} aria-label="open task">
             <Flex gap={gap} vertical>
                 {
                     description
@@ -61,9 +61,9 @@ const TaskItem: React.FunctionComponent<ITask> =
                         </Tag>
                     )}
                 </Flex>
-                <Flex justify="end">
-                     <Button className={classes.btn} onClick={toDetails}>Редактировать</Button>
-                </Flex>
+                <div className={classes.bottomPlace}></div>
+                <span className={classes.message}>Нажмите для редактирования</span>
+  
             </Flex>
         </Card>
         </ConfigProvider>

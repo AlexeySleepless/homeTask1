@@ -1,5 +1,5 @@
 import React, { useState }  from "react";
-import TaskList from "../components/TaskList/TaskList";
+import TasksList from "../components/TasksList/TasksList";
 import type { ITask } from "../const";
 
 interface TaskListProps {
@@ -10,7 +10,7 @@ const TasksPage: React.FunctionComponent<TaskListProps> =
     ({tasks}) => {
     return (
         <div>
-            <TaskList tasks = {tasks}></TaskList>
+            <TasksList tasks = {tasks}></TasksList>
         </div>
     )
 }

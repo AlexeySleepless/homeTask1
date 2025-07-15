@@ -3,18 +3,28 @@
     overflow: hidden;
 }
 
-.btn, .tag{
-    max-width: 100%;
-}
-
 .tag{
+    max-width: 100%;
     margin: 0;
 }
 
-.card {
-    --margin: 10px;
-    margin: var(--margin);
-    width: 350px;
-    max-width: calc(100% - 2 * var(--margin));
-    flex-shrink: 0;
+.card{
+    position: relative;
+}
+.card:hover {
+   background-color: rgb(224, 245, 249);
+}
+
+.bottomPlace{
+    height: 25px;
+}
+
+.message{
+    --size: 10px;
+    color: rgb(181, 178, 178);
+    position: absolute; 
+    bottom: 10px;
+    right: 10px;
+    font-size: var(--size);
+    line-height: var(--size);
 }
