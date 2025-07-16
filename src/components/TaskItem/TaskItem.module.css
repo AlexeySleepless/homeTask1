@@ -15,16 +15,24 @@
    background-color: rgb(224, 245, 249);
 }
 
+
+.message, .bottomPlace{
+    --size: 10px;
+}
+
 .bottomPlace{
-    height: 25px;
+    height: var(--size);
 }
 
 .message{
-    --size: 10px;
+    --padding: 10px;
     color: rgb(181, 178, 178);
     position: absolute; 
-    bottom: 10px;
-    right: 10px;
+    bottom: var(--padding);
+    right: var(--padding);
     font-size: var(--size);
     line-height: var(--size);
+    max-width: calc(100% - 2 * var(--padding));
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
