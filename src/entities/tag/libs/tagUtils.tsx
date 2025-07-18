@@ -1,0 +1,42 @@
+
+import { parityTag } from "../models/model";
+import { categoryValues, priorityValues, statusValues, type categoryType, type priorityType, type statusType, type tagDataModel } from "../models/types";
+
+
+
+
+export function TagDataModel(color: string, value: string):tagDataModel{
+    return {
+        color,
+        value,
+    }
+}
+
+function isTagDataModel(value: any): value is tagDataModel {
+    return "color" in value && "value" in value;
+}
+
+/// для возврата цвета и надписи тега
+function getTagValueFromStorage<T>(storage: T,value: keyof T): tagDataModel{
+    if(!isTagDataModel(storage[value])){
+        return TagDataModel("white", "")
+    } 
+    return storage[value];
+}
+
+// для формирования данных необходимых для Select
+function getOptions<T extends {}>(typeValues: T, getFunction: (value: keyof T) => tagDataModel){
+    const keyArray = Object.keys(typeValues);
+    return keyArray.map(key=>({
+        value: key,
+        label: <span>{getFunction(key as keyof T).value}</span>,
+    }));
+}
+
+type tag = categoryType|statusType|priorityType;
+export const getTagValue = (value: tag) => getTagValueFromStorage(parityTag, value)
+
+export const getCategoryOptions = () => getOptions(categoryValues, getTagValue)
+export const getStatusOptions = () => getOptions(statusValues, getTagValue)
+export const getPriorityOptions = () => getOptions(priorityValues, getTagValue)
+
