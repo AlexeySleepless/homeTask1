@@ -27,6 +27,10 @@ export const Filters: React.FunctionComponent<filterProps> =
         dispatch(removeFilterTagByTagName(deleteTag))
         
     }
+    const tagCloseWrap = (event:  React.MouseEvent<HTMLSpanElement, MouseEvent>, deleteTag: tagType)=>{
+        event.preventDefault()
+        tagClose(deleteTag)
+    }
 
     const clearFilterTags = () => {
         dispatch(removeAllFilterTags())
@@ -49,8 +53,8 @@ export const Filters: React.FunctionComponent<filterProps> =
                                 tabIndex={0}
                                 className={classes.tag}
                                 closable
-                                onClose = {e=>{tagClose(tagName)}}
-                                onClick = {e=>{tagClose(tagName)}}
+                                onClose = {e=>{tagCloseWrap(e,tagName)}}
+                                onClick = {e=>{tagCloseWrap(e,tagName)}}
                             >
                                 {value}
                             </AdaptTag>

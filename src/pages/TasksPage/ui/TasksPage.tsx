@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { useAppSelector, type IFilterTag, type ITask } from "../../../entities";
+import { useAppSelector } from "../../../entities";
 import { Filters, TaskList } from "../../../widgets";
 import { filtrationTasks, ForwardCreateTaskPage } from "../../../features";
 import classes from "./TasksPage.module.css"

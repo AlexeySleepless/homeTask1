@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider, Flex, Tag, Typography } from "antd";
+import { Divider, Flex, Typography } from "antd";
 import classes from './TaskItem.module.css';
 import { getTagValue } from "../../../tag";
 import type { ITask } from "../../model";
