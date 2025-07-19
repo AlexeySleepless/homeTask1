@@ -1,12 +1,12 @@
 import type { IFilterTag, ITask } from "../../entities";
 
 export const filtrationTasks = (tasks: ITask[], filterTags: IFilterTag[]): ITask[] => {
-    console.log("filter")
+
     if(!(tasks.length&&filterTags.length)){
         return tasks;
     }
 
-    // надо сгруппировать теги для дальнейшей филmтрации,
+    // надо сгруппировать теги для дальнейшей фильтрации,
     // так как параметры задачи должны включать хотя бы один тег 
     // из каждой группы тегов
 
