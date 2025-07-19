@@ -1,6 +1,6 @@
 
 import { parityTag } from "../models/model";
-import { categoryValues, priorityValues, statusValues, type categoryType, type priorityType, type statusType, type tagDataModel } from "../models/types";
+import { categoryValues, priorityValues, statusValues, type tagType, type tagDataModel } from "../models/types";
 
 
 
@@ -32,9 +32,7 @@ function getOptions<T extends {}>(typeValues: T, getFunction: (value: keyof T) =
         label: <span>{getFunction(key as keyof T).value}</span>,
     }));
 }
-
-type tag = categoryType|statusType|priorityType;
-export const getTagValue = (value: tag) => getTagValueFromStorage(parityTag, value)
+export const getTagValue = (value: tagType) => getTagValueFromStorage(parityTag, value)
 
 export const getCategoryOptions = () => getOptions(categoryValues, getTagValue)
 export const getStatusOptions = () => getOptions(statusValues, getTagValue)

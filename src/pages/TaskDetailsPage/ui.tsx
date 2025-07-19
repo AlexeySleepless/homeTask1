@@ -11,19 +11,18 @@ export const TaskDetailsPage: React.FunctionComponent =
         return(<ErrorPage/>);
     }
     const updateTask = useUpdateTask();
-    const returnPrevPage = useReturnMainPage();
+    const returnMainPage = useReturnMainPage();
     const onFinish = (changeTask: ITask) => {
         const readyTask: ITask = {...changeTask, id: task.id, date: task.date};
         updateTask(readyTask);
-        returnPrevPage()
+        returnMainPage()
     }
-    console.log(task)
     return (
         <TaskForm task={task}
             titleForm="Редактирование задачи"
             titleSubmitButton="Cохранить"
             onFinish={onFinish}
-            closeForm = {returnPrevPage}
+            closeForm = {returnMainPage}
         />
     )
 }

@@ -4,6 +4,7 @@ import classes from './TaskItem.module.css';
 import { getTagValue } from "../../../tag";
 import type { ITask } from "../../model";
 import { dateToString } from "../../libs/dateFormat";
+import { AdaptTag } from "../../../../shared";
 
 
 const {Paragraph, Text, Title} = Typography;
@@ -21,14 +22,21 @@ export const TaskItem: React.FunctionComponent<ITaskItem> =
     const zeroMargin = {margin: "0"};
     return(
        
-        <Flex className={classes.card}  aria-label="open task" vertical onClick={()=>{taskOnClick?.()}}>
+        <Flex
+            tabIndex={0}
+            className={classes.card} 
+            aria-label="open task for edit"
+            vertical
+            onClick={()=>{taskOnClick?.()}}
+        >
             <Flex gap={gap} vertical className={classes.flexGrowElement}>
-                <Title level={5} style = {zeroMargin}>{title}</Title>
+                <Title level={5} style = {zeroMargin} tabIndex={0}>{title}</Title>
                 <Divider size="small" style = {zeroMargin}/>
                 <Flex gap={gap} vertical className={classes.flexGrowElement}>
                     {
                         description
-                        ?<Paragraph 
+                        ?<Paragraph
+                            tabIndex={0}
                             ellipsis={{ rows: 3, expandable: false }}
                             style = {zeroMargin}
                         >
@@ -40,16 +48,16 @@ export const TaskItem: React.FunctionComponent<ITaskItem> =
                     <Flex wrap gap={gap}>
                         {tags.map( tagName => {
                             const {value, color} = getTagValue(tagName);
-                            return <Tag key = {value} color={color} className={classes.tag}>
+                            return <AdaptTag key = {value} color={color} tabIndex={0}>
                                 {value}
-                            </Tag>
+                            </AdaptTag>
                         } )}
                     </Flex>
                     
                 </Flex>
                 <Flex wrap gap={gap} justify="space-between" align="end">
                     {action}
-                    <Text className={classes.date}>{dateToString(date)}</Text>
+                    <Text className={classes.date} tabIndex={0}>{dateToString(date)}</Text>
                     
                 </Flex>
                 <Text className={classes.message}>Нажмите для редактирования</Text>

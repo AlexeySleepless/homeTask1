@@ -1,0 +1,1 @@
+export { dataSelects } from "./model/model";

@@ -1,0 +1,6 @@
+.tag{
+    max-width: 100%;
+    margin: 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}

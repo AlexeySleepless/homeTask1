@@ -37,3 +37,6 @@ export interface tagDataModel {
     color: string
     value: string
 }
+
+
+export type tagType = categoryType|statusType|priorityType;

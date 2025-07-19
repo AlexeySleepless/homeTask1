@@ -1,0 +1,51 @@
+.grid{
+    display: grid;
+    gap: 5px;
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+}
+
+.filtersWrapper{
+    margin: 10px
+}
+.filterTitle{
+    padding-left: 11px;
+}
+
+.placeholder{
+    padding-left: 6px;
+    color: rgb(148, 146, 146);
+}
+
+.deleteButton{
+    border: none;
+    flex-shrink: 0;
+}
+
+.tagsManageWrapper{
+    display: flex;
+    align-items: center;
+    min-height: 42px;
+    border: 1px solid#d9d9d9;
+    background: #ffffff;
+    border-radius: 8px;
+}
+
+.tagsWrapper {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    gap: 5px;
+    padding: 5px;
+}
+
+.select{
+    width: 100%;
+    max-width: 300px;
+}
+
+.tag{
+    height: 30px;
+    display: flex;
+    align-items: center;
+}

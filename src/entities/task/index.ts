@@ -1,3 +1,4 @@
+export { EmptyTask } from "./libs/taskUtils";
 export { TaskItem, TaskForm } from "./ui";
 export { tasksReducer, tasksSlice } from "./libs/tasksSlice";
 export { taskRouting } from "./libs/taskRouting";

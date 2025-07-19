@@ -1,11 +1,6 @@
-.btn span, .tag{
+.btn span{
     text-overflow: ellipsis;
     overflow: hidden;
-}
-
-.tag{
-    max-width: 100%;
-    margin: 0;
 }
 
 .card{
@@ -15,9 +10,12 @@
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.2);
     transition: box-shadow 0.3s;
 }
-.card:hover {
-   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+@media (pointer: fine) {
+    .card:hover {
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    }
 }
+
 
 .title{
     margin:0;
