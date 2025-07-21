@@ -25,3 +25,5 @@ State-менеджер: Redux-toolkit
 Сборщик проекта: Vite.
 UI-фреймворк: Ant-Design.
 Инструменты стилизации: css modules.
+
+Деплой: https://home-task1.vercel.app/
