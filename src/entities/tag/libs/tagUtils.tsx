@@ -12,7 +12,10 @@ export function TagDataModel(color: string, value: string):tagDataModel{
     }
 }
 
-function isTagDataModel(value: any): value is tagDataModel {
+function isTagDataModel(value: unknown): value is tagDataModel {
+    if(!(value && typeof value === "object")){
+        return false;
+    }
     return "color" in value && "value" in value;
 }
 
