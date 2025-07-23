@@ -1,6 +1,6 @@
 import React  from "react";
 import classes from './TaskForm.module.css';
-import { Button, Card, Flex, Form, Input } from "antd";
+import { Button, Card, Flex, Form, Input, Spin } from "antd";
 import TextArea from "antd/es/input/TextArea";
 import type { ITask } from "../../model";
 import { SelectTitle } from "../../../../shared";
@@ -11,12 +11,13 @@ interface TaskFormProps {
     titleForm: string
     titleSubmitButton: string
     task: ITask;
-    onFinish?: ((values: ITask) => void) | undefined
+    onFinish?: ((value: ITask) => void) | undefined
     closeForm?: () => void | undefined
+    isLoading?: boolean
 }
 
 export const TaskForm: React.FunctionComponent<TaskFormProps> = 
-    ({titleForm, titleSubmitButton, task, onFinish, closeForm}) => {
+    ({titleForm, titleSubmitButton, task, onFinish, closeForm, isLoading}) => {
     const titleString = "Заголовок задачи";
     const descriptionString = "Описание задачи";
     const titleName: keyof ITask = "title";
@@ -50,7 +51,9 @@ export const TaskForm: React.FunctionComponent<TaskFormProps> =
                 <Flex className={classes.buttonFlex} gap="small" justify="space-between" wrap>
                     <Button className={classes.btn} onClick={closeForm}>Отмена</Button>
                     <Form.Item>
-                        <Button className={classes.btn} type="primary" htmlType="submit">{titleSubmitButton}</Button>
+                        {isLoading
+                        ?<Spin></Spin>
+                        :<Button className={classes.btn} type="primary" htmlType="submit">{titleSubmitButton}</Button>}
                     </Form.Item>
                 </Flex>
             </Form>

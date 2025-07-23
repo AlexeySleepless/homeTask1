@@ -3,3 +3,7 @@
     margin: 10px;
     justify-content: end;
 }
+
+.spin{
+    display: block;
+}

@@ -1,26 +1,33 @@
 import { DeleteOutlined } from "@ant-design/icons"
-import { Button, Popconfirm } from "antd"
-import { tasksSlice, useAppDispatch, type ITask } from "../../entities"
+import { Button, Popconfirm, Spin } from "antd"
+import {  tasksApi, type ITask } from "../../entities"
+import { useShowMessageError } from "../showMessageError/useShowMessageError";
 
 export const RemoveTaskButton: React.FunctionComponent<ITask> = (task) => {
-    const { removeTask } = tasksSlice.actions;
     const actionTitle = "Удаление задачи";
-    const dispatch = useAppDispatch();
-    const remove = () => {
-        dispatch(removeTask(task))
-    };
+    const [deleteTask, {isLoading, error}] = tasksApi.useDeleteTaskMutation();
+    const handleRemove = () => {
+        deleteTask(task)
+    }
+    const contextHolder = useShowMessageError(error);
     
     return(
         <div onClick={e=>{e.stopPropagation()}}>
-            <Popconfirm
-                title={actionTitle}
-                description="Вы уверены, что хотите удалить задачу?"
-                onConfirm={remove}
-                okText="Да"
-                cancelText="Нет"
-            >
-                <Button aria-label = {actionTitle} size="small" icon={<DeleteOutlined/>} danger/>
-            </Popconfirm>
+            {contextHolder}
+            {
+                isLoading
+                ?<Spin/>
+                :<Popconfirm
+                    title={actionTitle}
+                    description="Вы уверены, что хотите удалить задачу?"
+                    onConfirm={handleRemove}
+                    okText="Да"
+                    cancelText="Нет"
+                >
+                    <Button aria-label = {actionTitle} size="small" icon={<DeleteOutlined/>} danger/>
+                </Popconfirm>
+            }
+            
         </div>
     )
 }

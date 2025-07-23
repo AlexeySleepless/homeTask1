@@ -1,10 +1,22 @@
-import { tasksSlice, useAppDispatch, type ITask } from "../../entities";
+import { isFetchError, tasksApi, type ITask } from "../../entities";
 
 export const useCreateTask = () => {
-    const { addTask } = tasksSlice.actions;
-    const dispatch = useAppDispatch();
-    const createFn = (task: ITask) => {
-            dispatch(addTask(task))
+    const [createTask, processObject] = tasksApi.useCreateTaskMutation();
+    const createFn = async (task: ITask) => {
+            const date = Date.now();
+            const readyTask: ITask = {...task, id: date, date};
+
+            // прокидываем только ошибку соединения
+            try{
+                await createTask(readyTask).unwrap()
+            }catch(err){
+                if(isFetchError(err)){
+                    throw err;
+                }
+            }
     };
-    return createFn;
+    return {
+        createFn,
+        processObject
+    };
 }

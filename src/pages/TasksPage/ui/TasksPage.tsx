@@ -1,16 +1,21 @@
 import React, { useMemo } from "react";
-import { useAppSelector } from "../../../entities";
+import { tasksApi, useAppSelector } from "../../../entities";
 import { Filters, TaskList } from "../../../widgets";
 import { filtrationTasks, ForwardCreateTaskPage } from "../../../features";
 import classes from "./TasksPage.module.css"
-import { Divider } from "antd";
+import { Divider, Spin } from "antd";
 
 export const TasksPage: React.FunctionComponent = 
     () => {
-    const { tasks } = useAppSelector( state => state.tasksReducer );
+    const {data: tasks, isLoading} = tasksApi.useFetchAllTasksQuery('',{
+        //получаем список задач каждые 5 секунд
+        pollingInterval: 5000,
+    });
     const { filterTags } =useAppSelector( state => state.filterTagsReducer);
-    //const filteredTasks = filtrationTasks(tasks, filterTags);
-    const filteredTasks = useMemo(()=>filtrationTasks(tasks, filterTags), [tasks, filterTags])
+    const filteredTasks = useMemo(()=>{
+        const taskArray = tasks || [];
+        return filtrationTasks(taskArray, filterTags)
+    }, [tasks, filterTags])
     return (
         <>
             <Filters filterTags={filterTags}/>
@@ -18,6 +23,7 @@ export const TasksPage: React.FunctionComponent =
                 <ForwardCreateTaskPage/>
             </div>
             <Divider>Задачи: {filteredTasks.length}</Divider>
+            {isLoading&&<Spin className={classes.spin}/>}
             <TaskList tasks={filteredTasks}/>
         </>
     )

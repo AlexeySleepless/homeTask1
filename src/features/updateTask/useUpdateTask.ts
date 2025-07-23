@@ -1,10 +1,19 @@
-import { tasksSlice, useAppDispatch, type ITask } from "../../entities";
+import { isFetchError, tasksApi, type ITask } from "../../entities";
 
 export const useUpdateTask = () => {
-    const { updateTask } = tasksSlice.actions;
-    const dispatch = useAppDispatch();
-    const updateFn = (task: ITask) => {
-            dispatch(updateTask(task))
+    const [updateTask, processObject] = tasksApi.useUpdateTaskMutation();
+    const updateFn = async (task: ITask) => {
+        // прокидываем только ошибку соединения
+        try{
+            await updateTask(task).unwrap()
+        }catch(err){
+            if(isFetchError(err)){
+                throw err;
+            }
+        }
     };
-    return updateFn;
+    return {
+        updateFn,
+        processObject
+    };
 }

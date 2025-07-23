@@ -1,24 +1,32 @@
 import { EmptyTask, TaskForm, type ITask } from "../../entities"
 import { useCreateTask, useReturnMainPage } from "../../features";
+import { useShowMessageError } from "../../features/showMessageError/useShowMessageError";
 
 export const CreateTaskPage: React.FunctionComponent = 
     () => {
     const emptyTask = EmptyTask();
-    const createTask = useCreateTask();
+    const {createFn, processObject} = useCreateTask();
+    const {isLoading, error} = processObject;
     const returnMainPage = useReturnMainPage();
-    const onFinish = (newTask: ITask) => {
-        const date = Date.now();
-        const readyTask: ITask = {...newTask, id: date, date};
-        createTask(readyTask);
-        returnMainPage()
+    const onFinish = async (newTask: ITask) => {
+        try{
+            await createFn(newTask)
+            returnMainPage();
+        }catch(error){
+        }
     }
+    const contextHolder = useShowMessageError(error);
 
     return (
-        <TaskForm task={emptyTask}
-            titleForm="Создание задачи"
-            titleSubmitButton="Создать"
-            onFinish={onFinish}
-            closeForm = {returnMainPage}
-        />
+        <>
+            {contextHolder}
+            <TaskForm task={emptyTask}
+                titleForm="Создание задачи"
+                titleSubmitButton="Создать"
+                onFinish={onFinish}
+                closeForm = {returnMainPage}
+                isLoading = {isLoading}
+            />
+        </>
     )
 }
